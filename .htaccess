@@ -1,0 +1,45 @@
+# ============================================================
+# .htaccess — routing SPA + blokir akses file/folder sensitif
+# ============================================================
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /
+
+    # ---- Blokir akses langsung ke folder sensitif ----
+    RewriteRule ^(\\.git|\\.github|scripts|hooks|source|backend/controller/logic|frontend/node_modules|frontend/src|frontend/public|frontend/dist|\\.vscode|\\.idea)(/|$) - [F,L]
+
+    # ---- Cegah Apache redirect /admin -> /admin/ ----
+    RewriteCond %{REQUEST_URI} ^/(admin|classes|analytics|teacher|student|quiz|room)/$
+    RewriteRule ^ /%1 [R=301,L]
+
+    # ---- File/direktori yang benar-benar ada: biarkan ----
+    RewriteCond %{REQUEST_FILENAME} -f [OR]
+    RewriteCond %{REQUEST_FILENAME} -d
+    RewriteRule ^ - [L]
+
+    # ---- Fallback SPA: semua route React -> index.html ----
+    RewriteRule ^ index.html [L]
+</IfModule>
+
+# ---- Blokir file sensitif ----
+<IfModule mod_authz_core.c>
+    <FilesMatch "^\\.(env|gitignore|gitattributes|htpasswd)|package-lock\\.json$">
+        Require all denied
+    </FilesMatch>
+    <FilesMatch "\\.(env|sh|sql|bak|old|orig|save|swp|swo|tmp|log|lock)$">
+        Require all denied
+    </FilesMatch>
+</IfModule>
+
+# ============================================================
+# Header keamanan
+# ============================================================
+<IfModule mod_headers.c>
+    Header always set X-Content-Type-Options "nosniff"
+    Header always set X-Frame-Options "SAMEORIGIN"
+    Header always set Content-Security-Policy "default-src 'self'; script-src 'self' https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'self'"
+    Header always unset X-Powered-By
+</IfModule>
+
+ServerSignature Off
