@@ -237,6 +237,7 @@ const FeatureNode = ({ data, selected }) => {
 const OctopusNode = ({ data }) => {
   const { RiveComponent } = useRive({
     src: `${import.meta.env.BASE_URL}assets/4974-10065-octopus-loop.riv`,
+    animations: 'Idle',
     autoplay: true,
   });
 
