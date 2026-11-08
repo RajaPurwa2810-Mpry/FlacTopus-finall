@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1002" height="166" viewBox="0 0 1002 166" role="img" aria-labelledby="title desc">
+  <title id="title">Alur pembelajaran FlacTopus</title>
+  <desc id="desc">Guru menyusun materi dan prasyarat. Murid mengerjakan kuis dan mendapat petunjuk. Guru meninjau pola jawaban kelas.</desc>
+  <style>
+    .step { font:700 19px Consolas,monospace; letter-spacing:1px; }
+    .label { font:700 30px 'Segoe UI',sans-serif; fill:#edf4ff; }
+    .detail { font:500 20px 'Segoe UI',sans-serif; fill:#bbcadd; }
+  </style>
+  <rect x=".5" y=".5" width="1001" height="165" rx="19" fill="#111a28" stroke="#34465a"/>
+    <g transform="translate(22 22)">
+    <rect width="302" height="122" rx="13" fill="#182434" stroke="#40536a"/>
+    <text x="18" y="31" class="step" fill="#71e8bc">01</text>
+    <text x="18" y="69" class="label">Guru menyusun</text>
+    <text x="18" y="96" class="detail">Materi dan prasyarat</text>
+  </g>
+  <g transform="translate(350 22)">
+    <rect width="302" height="122" rx="13" fill="#182434" stroke="#40536a"/>
+    <text x="18" y="31" class="step" fill="#acc9ff">02</text>
+    <text x="18" y="69" class="label">Murid mencoba</text>
+    <text x="18" y="96" class="detail">Kuis dan petunjuk</text>
+  </g>
+  <g transform="translate(678 22)">
+    <rect width="302" height="122" rx="13" fill="#182434" stroke="#40536a"/>
+    <text x="18" y="31" class="step" fill="#f0cf8c">03</text>
+    <text x="18" y="69" class="label">Guru meninjau</text>
+    <text x="18" y="96" class="detail">Pola jawaban kelas</text>
+  </g>
+  <path d="M330 82h14m-6-5 6 5-6 5M658 82h14m-6-5 6 5-6 5" fill="none" stroke="#7fa1b2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
