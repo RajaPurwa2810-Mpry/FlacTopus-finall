@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="87" height="34" viewBox="0 0 87 34">
+  <title>Rive</title>
+  <rect x=".5" y=".5" width="86" height="33" rx="8" fill="#151e2c" stroke="#43526a"/>
+  <rect x="6" y="6" width="27" height="22" rx="5" fill="#b7c5f5" fill-opacity=".13"/>
+  <text x="19.5" y="21" text-anchor="middle" fill="#b7c5f5" font-family="Segoe UI,sans-serif" font-size="10" font-weight="700">RI</text>
+  <text x="41" y="22" fill="#eaf0f8" font-family="Segoe UI,sans-serif" font-size="14" font-weight="600">Rive</text>
+</svg>

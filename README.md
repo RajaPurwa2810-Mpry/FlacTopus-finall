@@ -11,7 +11,7 @@
   <img src="./docs/images/tech-gemini.svg" height="32" alt="Google Gemini">
 </p>
 
-[Tentang proyek](#tentang-proyek) · [Fitur utama](#fitur-utama) · [Cara instalasi](#cara-instalasi) · [Arsitektur](#arsitektur-sistem) · [Referensi teknis](#referensi-teknis)
+[Tentang proyek](#tentang-proyek) · [Fitur utama](#fitur-utama) · [Teknologi](#teknologi-yang-dipakai) · [Cara instalasi](#cara-instalasi) · [Arsitektur](#arsitektur-sistem) · [Referensi teknis](#referensi-teknis)
 
 ## Tentang proyek
 
@@ -27,7 +27,7 @@ Kami mulai dari tujuan dalam satu kelas. Murid perlu menuntaskan dasar sebelum l
 
 ### Guru · susun peta dan evaluasi kelas
 
-[![Visual Builder memperlihatkan cabang prasyarat serta editor halaman materi, kuis, dan ice breaking](./docs/images/builder.webp)](./docs/images/builder.webp)
+[![Tampilan utuh Visual Builder dengan toolbar, jalur pengayaan dan remedial, panel Edit Node, serta kontrol zoom](./docs/images/builder.png)](./docs/images/builder.png)
 
 Guru menyusun node dengan *drag-and-drop* atau memulai dari template linear, bercabang, atau ujian akhir. Generator Gemini bisa membuat draf dari topik, teks, atau isi PDF. Satu node dapat memuat beberapa halaman **Materi**, **Kuis**, dan **Ice Breaking**.
 
@@ -83,40 +83,63 @@ Pendaftaran mandiri membuat akun murid berstatus `pending`. Admin meninjau penda
 
 > Selama kuis, browser mencatat perpindahan tab sebagai sinyal yang bisa ditinjau guru. Angka pada cuplikan berasal dari kelas demo.
 
+## Teknologi yang dipakai
+
+<p>
+  <img src="./docs/images/tech-react-router.svg" height="32" alt="React Router">
+  <img src="./docs/images/tech-recharts.svg" height="32" alt="Recharts">
+  <img src="./docs/images/tech-framer-motion.svg" height="32" alt="Framer Motion">
+  <img src="./docs/images/tech-rive.svg" height="32" alt="Rive">
+  <img src="./docs/images/tech-pdfjs.svg" height="32" alt="PDF.js">
+  <img src="./docs/images/tech-lucide.svg" height="32" alt="Lucide">
+</p>
+
+| Bagian | Teknologi | Dipakai untuk |
+| --- | --- | --- |
+| Antarmuka | JavaScript/JSX, HTML, CSS, React 19, React DOM, React Router 7, Lucide React | Halaman guru, murid, dan admin, navigasi SPA, serta ikon. |
+| Editor dan grafik | React Flow (`@xyflow/react`), Recharts | Node dan relasi prasyarat, grafik partisipasi, nilai, dan distribusi jawaban. |
+| Animasi dan media | Framer Motion, Rive (`@rive-app/react-canvas`), canvas-confetti, Web Audio API, HTMLAudio, embed YouTube | Transisi, maskot interaktif, efek penyelesaian node, suara kuis, dan video materi. |
+| Dokumen dan konten | PDF.js (`pdfjs-dist`), DOMPurify | Mengambil teks PDF untuk draf silabus dan menyaring HTML pada pratinjau materi. |
+| Server dan data | PHP 8 native, sesi PHP, PDO, MariaDB/MySQL, JSON, Apache/XAMPP | API kelas, autentikasi, migrasi, hasil kuis, penyimpanan graf silabus, dan routing Apache. |
+| Integrasi AI | Google Gemini REST API, PHP cURL, Fetch API | Browser memanggil API PHP. Server mengirim permintaan Gemini untuk tutor, asisten, dan generator silabus. |
+| Perkakas pengembangan | Node.js, npm, Vite 8, plugin React untuk Vite, Oxlint, tipe React/React DOM, GitHub Actions | Menjalankan dan membangun frontend, lint, bantuan tipe di editor, serta pemindaian secret di CI. |
+
+<details>
+<summary><strong>Lihat kredit pustaka dan aset</strong></summary>
+
+**tsParticles** tercantum di kredit beranda. Efek yang dipanggil kode pada versi ini memakai **canvas-confetti**. Paket `@google/generative-ai` tercantum di manifest, sedangkan jalur Gemini yang dipakai aplikasi melalui proxy PHP. [Kredit beranda](./frontend/src/pages/Landing.jsx) · [Manifest frontend](./frontend/package.json) · [Proxy Gemini](./backend/controller/api/gemini.php)
+
+Kredit aset Rive dicatat di beranda sebagai **CC BY 4.0**.
+
+- **Octopus Loop** oleh pedroalpera. [Aset Rive](https://rive.app/community/files/4974-10065-octopus-loop/)
+- **Smiley Stress Reliever** oleh jodunson. [Aset Rive](https://rive.app/marketplace/16938-41043-smiley-stress-reliever/)
+- **Animojis** oleh very_true_story. [Aset Rive](https://rive.app/marketplace/27832-52591-animojis/)
+
+</details>
+
 ## Cara instalasi
 
-### Prasyarat
+1. Siapkan **XAMPP** dan **Node.js 24 LTS**. Nyalakan **Apache** dan **MySQL** di XAMPP.
+2. Di GitHub pilih **Code → Download ZIP**. Ubah nama folder hasil ekstrak menjadi `FlacTopus`, lalu taruh di `C:\xampp\htdocs`. Pastikan jalurnya `C:\xampp\htdocs\FlacTopus\frontend`. Kalau proyek sudah ada di sana, langsung gunakan folder itu.
+3. Buka **Command Prompt (CMD)** dan jalankan blok berikut.
 
-- Windows dengan **XAMPP**. Nyalakan **Apache** di port `80` dan **MySQL/MariaDB** di port `3306`. Siapkan PHP 8.x dengan `pdo_mysql`. Fitur Gemini memerlukan `curl` PHP dan koneksi internet.
-- **Node.js 24 LTS** dan npm. Node 22 juga memenuhi syarat paket proyek mulai dari **22.13**. Siapkan Git untuk langkah klon.
-
-### 1. Siapkan folder, konfigurasi, dan database
-
-Jalankan di PowerShell. Nama folder `FlacTopus` mengikuti base path Vite dan konfigurasi Apache.
-
-```powershell
-Set-Location 'C:\xampp\htdocs'
-git clone https://github.com/RajaPurwa2810-Mpry/FlacTopus-finall.git FlacTopus
-Set-Location .\FlacTopus
-Copy-Item .\auth\config.example.php .\auth\config.php
-& 'C:\xampp\php\php.exe' .\db\migration.php
 ```
-
-Migrasi CLI membuat database `project_lomba`, tabel hingga versi **v6**, dan akun demo pada instalasi kosong. Default lokal memakai pengguna database `root` dengan password kosong. Jika koneksi database berbeda, sesuaikan pengaturan pada `auth/config.php` dan `db/migration.php` sebelum menjalankan migrasi.
-
-### 2. Jalankan frontend dengan Vite
-
-```powershell
-Set-Location .\frontend
+cd /d "C:\xampp\htdocs\FlacTopus"
+if not exist "auth\config.php" copy "auth\config.example.php" "auth\config.php"
+"C:\xampp\php\php.exe" "db\migration.php"
+cd frontend
 npm.cmd ci
 npm.cmd run dev
 ```
 
-Buka [localhost:5173/FlacTopus/](http://localhost:5173/FlacTopus/). Vite menjalankan React dan meneruskan permintaan PHP ke Apache. Biarkan Apache, MySQL, dan terminal Vite berjalan.
+Buka [localhost:5173/FlacTopus/](http://localhost:5173/FlacTopus/) dan biarkan terminal berjalan. Kalau folder proyek dan frontend sudah siap dan yang perlu disiapkan hanya database, jalankan baris `migration.php` dari folder `FlacTopus`. Migrasi membuat database `project_lomba`, tabel, dan akun demo pada instalasi kosong.
 
-### 3. Aktifkan Gemini bila diperlukan
+<details>
+<summary><strong>Aktifkan Gemini bila diperlukan</strong></summary>
 
-Isi `GEMINI_API_KEY` di salinan lokal `auth/config.php` dengan kunci dari [Google AI Studio](https://aistudio.google.com/apikey). Simpan file konfigurasi lokal di luar commit. Alur kelas, editor manual, dan pencatatan kuis dapat dicoba dengan konfigurasi dasar. Tutor generatif, generator silabus, dan asisten AI memerlukan kunci valid.
+Untuk mencoba tutor generatif, generator silabus, atau asisten AI, isi `GEMINI_API_KEY` di `auth/config.php` dengan kunci dari [Google AI Studio](https://aistudio.google.com/apikey). PHP memerlukan ekstensi `curl` dan koneksi internet. Simpan konfigurasi berkunci di luar commit. Alur kelas, editor manual, dan pencatatan kuis dapat dicoba dengan konfigurasi dasar.
+
+</details>
 
 <details>
 <summary><strong>Build untuk dibuka langsung lewat Apache</strong></summary>
@@ -154,10 +177,13 @@ Buka [localhost/FlacTopus/](http://localhost/FlacTopus/). Langkah salin memperta
 | Gejala | Yang perlu dicek |
 | --- | --- |
 | Vite tampil, login atau API gagal | Nyalakan Apache. Cocokkan port Apache dengan target proxy di `frontend/vite.config.js`. Pastikan URL berawal dari `/FlacTopus/`. |
-| Migrasi gagal menyambung ke database | Cek layanan MySQL, ekstensi `pdo_mysql`, dan kredensial pada file migrasi serta konfigurasi aplikasi. |
+| Migrasi gagal menyambung ke database | Cek layanan MySQL, ekstensi `pdo_mysql`, dan kredensial di `db/migration.php` serta `auth/config.php`. Default lokal memakai `root` tanpa password di port `3306`. |
 | Halaman Apache kosong atau 404 | Jalankan build dan salin hasilnya ke folder aplikasi. Pastikan Apache membaca `.htaccess` dan `mod_rewrite` aktif. Jika rute dalam gagal saat dimuat ulang di XAMPP, sesuaikan `RewriteBase` lokal menjadi `/FlacTopus/`. |
 | Silabus gagal disimpan | Pastikan Apache punya akses tulis ke `storage/ruangan/`. |
+| PDF atau video gagal dibuka di build Apache | Cek aturan Content Security Policy untuk sumber worker PDF.js atau iframe video. |
 | Gemini gagal merespons | Cek kunci di konfigurasi lokal, ekstensi `curl`, koneksi internet, serta kuota/model Gemini. |
+
+Jika memindahkan kelas yang sudah terisi, pindahkan juga cadangan database dan folder `storage/ruangan/`. File JSON di folder itu menyimpan isi dan relasi node.
 
 </details>
 
