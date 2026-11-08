@@ -21,7 +21,7 @@ Kami mulai dari tujuan dalam satu kelas. Murid perlu menuntaskan dasar sebelum l
 
 <p><img src="./docs/images/alur-belajar.svg" width="100%" alt="Guru menyusun materi dan prasyarat. Murid mencoba kuis dan mendapat petunjuk. Guru meninjau pola jawaban kelas."></p>
 
-**Peran tim.** Raja Purwanto merencanakan proyek dan mengerjakan UI/UX alur guru, murid, dan admin. Satu rekan membantu mengembangkan ide dan memberi masukan desain. Rekan lainnya menangani keamanan aplikasi.
+**Peran tim.** Saya merencanakan proyek dan mengerjakan UI/UX alur guru, murid, dan admin. Satu rekan membantu mengembangkan ide dan memberi masukan desain. Rekan lainnya menangani keamanan aplikasi.
 
 ## Fitur utama
 
